@@ -35,6 +35,7 @@ public class Todo {
         this.createdAt=LocalDateTime.now();
         this.updatedAt=LocalDateTime.now();
         this.priority=Priority.LOW;
+        this.status=Status.TODO;
     }
     public Todo(String title,String description,Priority priority){
         this();

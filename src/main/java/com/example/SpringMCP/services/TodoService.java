@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TodoService {    
     public final Map<String,Todo>todos=new HashMap<>();
+
     public Todo createTodo(String title,String description,Todo.Priority priority){
         // Todo todo=Todo.builder().title(title).description(description).priority(priority).build();
         Todo todo = new Todo(title, description, priority);
