@@ -1,17 +1,20 @@
 package com.example.SpringMCP.tools;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
 import com.example.SpringMCP.models.Todo;
 import com.example.SpringMCP.services.TodoService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 // Will act as a controller layer 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class TodoManagementTools {
     private final TodoService todoService;
+    // Create Todo
     @Tool(description = "Create a new todo with a title, description and priority levels are LOW,MEDIUM and HIGH")
     public String createTodo(
         @ToolParam(description = "The title of the todo")String title,
@@ -27,7 +30,26 @@ public class TodoManagementTools {
         Todo todo=todoService.createTodo(title, description, p);
         return "Todo created successfully"+todo.toString();
     }
+    @Tool(description = "List all todos in the system, Returns todos ID, title, description, priority and status for each todo")
+    public String listAllTodos(){
+        List<Todo>todos=todoService.getTodos();
+        if(todos.isEmpty()){
+            return "No todos found";
+        }
+        StringBuilder sb=new StringBuilder();
+        for(Todo todo:todos){
+            sb.append(todo.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    @Tool(description = "Get a specific todo by its ID,title,description,priority and status.")
+    public String getTodo(@ToolParam(description = "The id of the TODO")String id){
+        Optional<Todo> todo= todoService.getTodo(id);
+        if(todo.isEmpty()){
+            return "Todo not found";
+        }else{
+            return todo.toString();
+        }
+    }
 }
-
-
-// 37:52
