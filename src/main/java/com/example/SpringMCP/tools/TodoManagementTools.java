@@ -30,6 +30,7 @@ public class TodoManagementTools {
         Todo todo=todoService.createTodo(title, description, p);
         return "Todo created successfully"+todo.toString();
     }
+    // listAllTodos
     @Tool(description = "List all todos in the system, Returns todos ID, title, description, priority and status for each todo")
     public String listAllTodos(){
         List<Todo>todos=todoService.getTodos();
@@ -42,7 +43,7 @@ public class TodoManagementTools {
         }
         return sb.toString();
     }
-
+    // getTodo
     @Tool(description = "Get a specific todo by its ID,title,description,priority and status.")
     public String getTodo(@ToolParam(description = "The id of the TODO")String id){
         Optional<Todo> todo= todoService.getTodo(id);

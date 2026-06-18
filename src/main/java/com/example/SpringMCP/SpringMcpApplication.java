@@ -9,5 +9,5 @@ public class SpringMcpApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringMcpApplication.class, args);
 	}
-
+	
 }

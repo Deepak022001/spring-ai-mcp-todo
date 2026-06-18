@@ -20,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 public class TodoService {    
     public final Map<String,Todo>todos=new HashMap<>();
     public Todo createTodo(String title,String description,Todo.Priority priority){
-        Todo todo=Todo.builder().title(title).description(description).priority(priority).build();
+        // Todo todo=Todo.builder().title(title).description(description).priority(priority).build();
+        Todo todo = new Todo(title, description, priority);
         todos.put(todo.getId(), todo);
         return todo;
     }
@@ -43,7 +44,7 @@ public class TodoService {
     }
     public Optional<Todo>updateStatus(String id,Todo.Status status){
         Todo todo=todos.get(id);
-        if(todos==null){
+        if(todo==null){
             return Optional.empty();
         }
         todo.setStatus(status);
